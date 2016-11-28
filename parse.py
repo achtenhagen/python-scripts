@@ -56,7 +56,7 @@ def extract_values(dm):
 	
 # mysql> describe most_active;
 def insert_to_db(l, tbl):
-	db = MySQLdb.connect(host="localhost", user="root", passwd="", db="stocks")
+	db = MySQLdb.connect(host="127.0.0.1", user="root", passwd="", db="stocks")
 	c = db.cursor()
 	c.execute("""CREATE TABLE IF NOT EXISTS `%s` (
 	`rank` VARCHAR(50),
@@ -79,7 +79,7 @@ def insert_to_db(l, tbl):
 # convert to xhtml
 def html_to_xml(fn):
 	xhtml_file = fn + ".xhtml"
-	# os.system("tidy -asxhtml -numeric -quiet -o %s %s.html" % (xhtml_file, fn))
+	os.system("tidy -asxhtml -numeric -quiet -o %s %s.html" % (xhtml_file, fn))
 	return xhtml_file
 
 def main():
