@@ -33,8 +33,8 @@ def get_elms_for_atr_val(tag, atr, val):
 def get_text(e):
 	lst = []
 	if e.nodeType in (3,4):
-		if e.data != ' ':
-			return [e.data]
+		if not e.data.isspace():
+			lst.append(e.data)
 	else:
 		for child in e.childNodes:
 			lst = lst + get_text(child)
@@ -69,7 +69,6 @@ def insert_to_db(l, tbl):
 	
 	for d in l:
 		query = """INSERT INTO `%s` (rank, title, volume, price, diff, perc_diff) VALUES ("%s", "%s", "%s", "%s", "%s", "%s");""" % (tbl, d['rank'], d['title'], d['volume'], d['price'], d['diff'], d['perc_diff'])
-		print query
 		c.execute(query)
 		db.commit()
 	c.close()
